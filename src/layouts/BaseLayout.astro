@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import NewsletterSignup from "../components/NewsletterSignup.astro";
+import Search from "../components/Search.astro";
 
 interface Props {
   title?: string;
@@ -29,7 +30,8 @@ const {
         <a href="/" class="text-2xl font-bold tracking-tight text-charcoal hover:text-coral transition-colors">
           CookThis
         </a>
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-4">
+          <Search />
           <a href="/recipes" class="text-sm font-medium text-gray-mid hover:text-charcoal transition-colors">
             Recipes
           </a>

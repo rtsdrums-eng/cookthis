@@ -13,6 +13,157 @@
 
   --font-sans: "Inter", "system-ui", "-apple-system", "sans-serif";
   --font-serif: "Georgia", "Cambria", "Times New Roman", "serif";
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 24px rgba(0,0,0,0.1);
+  --shadow-xl: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+
+/* Better focus states */
+*:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Recipe card improvements */
+.recipe-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.recipe-card:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Badge animations */
+.badge-quick,
+.badge-veg,
+.badge-one-pan {
+  animation: fadeInScale 0.3s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Recipe page improvements */
+.recipe-content h2 {
+  border-bottom: 2px solid var(--color-gray-border);
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.recipe-content ul,
+.recipe-content ol {
+  margin-left: 1.5rem;
+}
+
+.recipe-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+/* Ingredient checkboxes */
+.ingredient-item {
+  display: flex;
+  align-items: start;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.ingredient-checkbox {
+  margin-top: 0.25rem;
+  accent-color: var(--color-coral);
+}
+
+/* Step numbers */
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: var(--color-coral);
+  color: white;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-right: 0.75rem;
+}
+
+/* Button improvements */
+.btn-primary {
+  background: var(--color-coral);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--color-coral-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Loading skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background-color: var(--color-gray-light);
+  background-image: linear-gradient(
+    90deg,
+    var(--color-gray-light),
+    #f7f7f5,
+    var(--color-gray-light)
+  );
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 1.5s infinite;
 }
 
 /* Print styles */

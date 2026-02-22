@@ -1,0 +1,173 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import RecipeCard from "../../../components/RecipeCard.astro";
+import { getCollection } from "astro:content";
+
+// Get category from URL
+export async function getStaticPaths() {
+  const allRecipes = await getCollection("recipes");
+
+  // Get unique categories
+  const categories = [...new Set(allRecipes.map(recipe => recipe.data.category))];
+
+  // Return paths for each category
+  return categories.map(category => ({
+    params: { category },
+    props: {
+      recipes: allRecipes.filter(recipe =>
+        recipe.data.category === category && !recipe.data.draft
+      ),
+      category
+    }
+  }));
+}
+
+const { recipes, category } = Astro.props;
+
+// Sort recipes by date
+const sortedRecipes = recipes.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Category display names and descriptions
+const categoryInfo = {
+  breakfast: {
+    name: "Breakfast",
+    description: "Start your day right with these morning favorites",
+    emoji: "🍳"
+  },
+  lunch: {
+    name: "Lunch",
+    description: "Midday meals that hit the spot",
+    emoji: "🥪"
+  },
+  dinner: {
+    name: "Dinner",
+    description: "Satisfying meals to end your day",
+    emoji: "🍽️"
+  },
+  side: {
+    name: "Sides",
+    description: "Perfect companions to any meal",
+    emoji: "🥗"
+  },
+  snack: {
+    name: "Snacks",
+    description: "Quick bites for any time",
+    emoji: "🍿"
+  },
+  dessert: {
+    name: "Desserts",
+    description: "Sweet treats to satisfy your cravings",
+    emoji: "🍰"
+  },
+  drink: {
+    name: "Drinks",
+    description: "Refreshing beverages",
+    emoji: "🥤"
+  }
+};
+
+const info = categoryInfo[category] || {
+  name: category,
+  description: "",
+  emoji: "🍴"
+};
+
+// Count recipes by cooking time
+const quickRecipes = sortedRecipes.filter(r => {
+  const time = r.data.totalTime || r.data.cookTime;
+  return typeof time === 'number' && time <= 30;
+}).length;
+---
+
+<BaseLayout
+  title={`${info.name} Recipes — CookThis`}
+  description={`${info.description}. ${sortedRecipes.length} ${info.name.toLowerCase()} recipes ready to cook.`}
+>
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6 text-sm">
+      <ol class="flex items-center gap-2">
+        <li>
+          <a href="/" class="text-gray-mid hover:text-charcoal transition-colors">Home</a>
+        </li>
+        <li class="text-gray-mid">/</li>
+        <li>
+          <a href="/recipes" class="text-gray-mid hover:text-charcoal transition-colors">Recipes</a>
+        </li>
+        <li class="text-gray-mid">/</li>
+        <li class="text-charcoal font-medium">{info.name}</li>
+      </ol>
+    </nav>
+
+    <!-- Category Header -->
+    <header class="mb-10 text-center">
+      <div class="text-5xl mb-4">{info.emoji}</div>
+      <h1 class="text-3xl font-bold mb-3">{info.name} Recipes</h1>
+      {info.description && (
+        <p class="text-gray-mid text-lg mb-4">{info.description}</p>
+      )}
+      <div class="flex items-center justify-center gap-6 text-sm text-gray-mid">
+        <span class="font-medium">{sortedRecipes.length} recipes</span>
+        {quickRecipes > 0 && (
+          <>
+            <span>•</span>
+            <span>{quickRecipes} under 30 minutes</span>
+          </>
+        )}
+      </div>
+    </header>
+
+    <!-- Filter Tags -->
+    <div class="mb-8 flex flex-wrap gap-2 justify-center">
+      <a
+        href="/recipes"
+        class="px-4 py-2 text-sm font-medium border border-gray-border rounded-lg hover:border-coral hover:text-coral transition-colors"
+      >
+        All Recipes
+      </a>
+      {Object.entries(categoryInfo).map(([key, val]) => (
+        <a
+          href={`/recipes/category/${key}`}
+          class={`px-4 py-2 text-sm font-medium border rounded-lg transition-colors ${
+            key === category
+              ? 'bg-coral text-white border-coral'
+              : 'border-gray-border hover:border-coral hover:text-coral'
+          }`}
+        >
+          {val.emoji} {val.name}
+        </a>
+      ))}
+    </div>
+
+    <!-- Recipe Grid -->
+    {sortedRecipes.length > 0 ? (
+      <div class="grid gap-8 md:grid-cols-2">
+        {sortedRecipes.map((recipe) => (
+          <RecipeCard recipe={recipe} />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-20">
+        <p class="text-gray-mid text-lg mb-4">No {info.name.toLowerCase()} recipes yet.</p>
+        <a
+          href="/recipes"
+          class="inline-flex items-center gap-2 text-coral hover:text-coral-dark transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+          Browse all recipes
+        </a>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  /* Smooth transitions for filter buttons */
+  a {
+    transition: all 0.2s ease;
+  }
+</style>

@@ -7,9 +7,9 @@ const recipes = defineCollection({
     title: z.string(),
     description: z.string(),
     author: z.string().default("Ryan"),
-    prepTime: z.string(),
-    cookTime: z.string(),
-    totalTime: z.string().optional(),
+    prepTime: z.union([z.string(), z.number()]).optional(),
+    cookTime: z.union([z.string(), z.number()]).optional(),
+    totalTime: z.union([z.string(), z.number()]).optional(),
     servings: z.number(),
     category: z.enum([
       "breakfast",

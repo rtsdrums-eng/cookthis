@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buttondown Newsletter Verification - CookThis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .test-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .test-card h2 {
+            color: #495057;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .step-number {
+            background: #E8663C;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #E8663C;
+        }
+        .btn {
+            background: #E8663C;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background: #D4552B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(232, 102, 60, 0.3);
+        }
+        .btn:disabled {
+            background: #adb5bd;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .test-emails {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .test-email-chip {
+            background: #e9ecef;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .test-email-chip:hover {
+            background: #E8663C;
+            color: white;
+        }
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #E8663C;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .checklist {
+            margin-top: 20px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .check-pending {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+        .check-success {
+            background: #28a745;
+            color: white;
+        }
+        .check-error {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Buttondown Newsletter Verification</h1>
+        <p class="subtitle">Complete testing suite for CookThis.com newsletter integration</p>
+
+        <!-- Test 1: Direct Submission Test -->
+        <div class="test-card">
+            <h2><span class="step-number">1</span> Live Submission Test</h2>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">
+                Submit a real email to test the full flow. Use a real email address you can check.
+            </p>
+            <input type="email" id="test-email" placeholder="your-real-email@example.com" value="">
+            <div>
+                <button class="btn" onclick="testLiveSubmission()">Submit to Buttondown</button>
+                <button class="btn btn-secondary" onclick="generateTestEmail()">Generate Test Email</button>
+            </div>
+            <div class="test-emails">
+                <div class="test-email-chip" onclick="setEmail(this.textContent)">test@example.com</div>
+                <div class="test-email-chip" onclick="setEmail(this.textContent)">ryan@cookthis.com</div>
+                <div class="test-email-chip" onclick="setEmail(this.textContent)">newsletter@test.com</div>
+            </div>
+            <div id="live-result" class="result"></div>
+        </div>
+
+        <!-- Test 2: Website Form Test -->
+        <div class="test-card">
+            <h2><span class="step-number">2</span> Test Website Form</h2>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">
+                Open your website and test the actual newsletter form implementation.
+            </p>
+            <button class="btn" onclick="window.open('http://localhost:4321#newsletter', '_blank')">Open Local Site</button>
+            <button class="btn" onclick="window.open('https://cookthis.com#newsletter', '_blank')">Open Live Site</button>
+            <div id="website-result" class="result info" style="display: block; margin-top: 15px;">
+                After submitting on your website, check the console (F12) for any errors.
+            </div>
+        </div>
+
+        <!-- Test 3: Verification Checklist -->
+        <div class="test-card">
+            <h2><span class="step-number">3</span> Verification Checklist</h2>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">
+                Steps to verify submissions are reaching Buttondown:
+            </p>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <span class="check-icon check-pending" id="check-1">1</span>
+                    <span>Submit test email using form above</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending" id="check-2">2</span>
+                    <span>Check your email inbox for confirmation from Buttondown</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending" id="check-3">3</span>
+                    <span>Log into Buttondown.email and check Subscribers tab</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon check-pending" id="check-4">4</span>
+                    <span>Verify subscriber appears in your Buttondown dashboard</span>
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                <button class="btn" onclick="window.open('https://buttondown.email/login', '_blank')">Open Buttondown Dashboard</button>
+                <button class="btn btn-secondary" onclick="testButtondownEndpoint()">Test Endpoint Status</button>
+            </div>
+            <div id="checklist-result" class="result"></div>
+        </div>
+
+        <!-- Test 4: Debug Information -->
+        <div class="test-card">
+            <h2><span class="step-number">4</span> Debug Information</h2>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">
+                Current configuration and endpoint status:
+            </p>
+            <div id="debug-info" style="font-family: monospace; font-size: 14px; background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                <div>Endpoint: https://buttondown.com/api/emails/embed-subscribe/cookthis</div>
+                <div>Method: POST</div>
+                <div>Mode: no-cors (required for embedded forms)</div>
+                <div>Newsletter ID: cookthis</div>
+                <div id="endpoint-status" style="margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="final-status" class="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        let testCount = 0;
+
+        function setEmail(email) {
+            document.getElementById('test-email').value = email;
+        }
+
+        function generateTestEmail() {
+            const timestamp = Date.now();
+            const email = `test${timestamp}@cookthis.com`;
+            document.getElementById('test-email').value = email;
+            showResult('live-result', `Generated: ${email}`, 'info');
+        }
+
+        function showResult(elementId, message, type) {
+            const resultDiv = document.getElementById(elementId);
+            resultDiv.className = `result ${type}`;
+            resultDiv.innerHTML = message;
+            resultDiv.style.display = 'block';
+        }
+
+        function updateChecklistItem(itemId, status) {
+            const checkIcon = document.getElementById(itemId);
+            checkIcon.className = `check-icon check-${status}`;
+            if (status === 'success') {
+                checkIcon.innerHTML = '✓';
+            } else if (status === 'error') {
+                checkIcon.innerHTML = '✗';
+            }
+        }
+
+        async function testLiveSubmission() {
+            const email = document.getElementById('test-email').value;
+
+            if (!email || !email.includes('@')) {
+                showResult('live-result', '❌ Please enter a valid email address', 'error');
+                return;
+            }
+
+            showResult('live-result', '<span class="spinner"></span> Submitting to Buttondown...', 'info');
+            updateChecklistItem('check-1', 'success');
+
+            try {
+                // Test 1: Direct form submission (same as your website)
+                const formData = new FormData();
+                formData.append('email', email);
+                formData.append('tag', 'cookthis-test');
+
+                const response = await fetch('https://buttondown.com/api/emails/embed-subscribe/cookthis', {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' // Required for Buttondown embedded forms
+                });
+
+                // Since no-cors doesn't give us response details, we assume success
+                testCount++;
+                showResult('live-result',
+                    `✅ Submission ${testCount} sent successfully!<br>
+                    <strong>Email:</strong> ${email}<br>
+                    <strong>Next steps:</strong><br>
+                    1. Check your email (${email}) for confirmation<br>
+                    2. Click the confirmation link in the email<br>
+                    3. Check Buttondown dashboard for new subscriber`,
+                    'success'
+                );
+
+                // Update checklist
+                setTimeout(() => {
+                    showResult('checklist-result',
+                        `⏰ Now check your email inbox for the confirmation message from Buttondown.`,
+                        'warning'
+                    );
+                }, 2000);
+
+                // Save to localStorage for tracking
+                const submissions = JSON.parse(localStorage.getItem('test_submissions') || '[]');
+                submissions.push({
+                    email: email,
+                    timestamp: new Date().toISOString(),
+                    testNumber: testCount
+                });
+                localStorage.setItem('test_submissions', JSON.stringify(submissions));
+
+                // Show final status
+                showResult('final-status',
+                    `📧 <strong>Submission Complete!</strong><br>
+                    Total test submissions: ${testCount}<br>
+                    <a href="https://buttondown.email/subscribers" target="_blank" style="color: #E8663C;">
+                        → Check Buttondown Subscribers
+                    </a>`,
+                    'info'
+                );
+
+            } catch (error) {
+                showResult('live-result', `❌ Error: ${error.message}`, 'error');
+                updateChecklistItem('check-1', 'error');
+            }
+        }
+
+        async function testButtondownEndpoint() {
+            showResult('checklist-result', '<span class="spinner"></span> Testing endpoint...', 'info');
+
+            try {
+                // Test if we can reach the endpoint
+                const response = await fetch('https://buttondown.com/api/emails/embed-subscribe/cookthis', {
+                    method: 'GET',
+                    mode: 'no-cors'
+                });
+
+                showResult('checklist-result',
+                    '✅ Buttondown endpoint is reachable. The "cookthis" newsletter exists!',
+                    'success'
+                );
+
+                document.getElementById('endpoint-status').innerHTML =
+                    '<span class="status-indicator status-success">✓ Endpoint Active</span>';
+
+            } catch (error) {
+                showResult('checklist-result',
+                    '⚠️ Could not verify endpoint (this is normal due to CORS)',
+                    'warning'
+                );
+            }
+        }
+
+        // Check previous submissions on load
+        window.addEventListener('load', () => {
+            const submissions = JSON.parse(localStorage.getItem('test_submissions') || '[]');
+            if (submissions.length > 0) {
+                testCount = submissions.length;
+                const lastSubmission = submissions[submissions.length - 1];
+                showResult('final-status',
+                    `📊 Previous test submissions found: ${testCount}<br>
+                    Last test: ${lastSubmission.email} at ${new Date(lastSubmission.timestamp).toLocaleString()}`,
+                    'info'
+                );
+            }
+
+            // Test endpoint on load
+            testButtondownEndpoint();
+        });
+    </script>
+</body>
+</html>

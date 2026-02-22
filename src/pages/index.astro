@@ -33,6 +33,7 @@ const recipes = allRecipes.sort((a, b) => b.data.date.valueOf() - a.data.date.va
             category={recipe.data.category}
             image={recipe.data.image}
             imageAlt={recipe.data.imageAlt}
+            tags={recipe.data.tags}
           />
         ))}
       </div>

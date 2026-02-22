@@ -5,28 +5,230 @@ import { getCollection } from "astro:content";
 
 const allRecipes = await getCollection("recipes", ({ data }) => !data.draft);
 const recipes = allRecipes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Count recipes by category
+const categoryCounts = recipes.reduce((acc, recipe) => {
+  acc[recipe.data.category] = (acc[recipe.data.category] || 0) + 1;
+  return acc;
+}, {});
+
+// Category info
+const categoryInfo = {
+  breakfast: { name: "Breakfast", emoji: "🍳" },
+  lunch: { name: "Lunch", emoji: "🥪" },
+  dinner: { name: "Dinner", emoji: "🍽️" },
+  side: { name: "Sides", emoji: "🥗" },
+  snack: { name: "Snacks", emoji: "🍿" },
+  dessert: { name: "Desserts", emoji: "🍰" },
+  drink: { name: "Drinks", emoji: "🥤" }
+};
+
+// Count quick recipes (30 minutes or less)
+const quickRecipes = recipes.filter(r => {
+  const time = r.data.totalTime || r.data.cookTime;
+  return typeof time === 'number' && time <= 30;
+}).length;
 ---
 
-<BaseLayout title="All Recipes — CookThis" description="Browse all CookThis recipes. Easy, delicious, no-fluff recipes for couples and families.">
+<BaseLayout
+  title="All Recipes — CookThis"
+  description="Browse all CookThis recipes. Easy, delicious, no-fluff recipes for couples and families."
+>
   <section class="max-w-3xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold mb-8">All Recipes</h1>
+    <!-- Header with stats -->
+    <div class="text-center mb-10">
+      <h1 class="text-3xl font-bold mb-3">All Recipes</h1>
+      <p class="text-gray-mid text-lg mb-4">
+        {recipes.length} recipes ready to cook
+      </p>
+      <div class="flex items-center justify-center gap-4 text-sm text-gray-mid">
+        {quickRecipes > 0 && (
+          <span class="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            {quickRecipes} quick meals
+          </span>
+        )}
+        <span>•</span>
+        <span>{Object.keys(categoryCounts).length} categories</span>
+      </div>
+    </div>
+
+    <!-- Category Filter Buttons -->
+    <div class="mb-8 flex flex-wrap gap-2 justify-center">
+      <a
+        href="/recipes"
+        class="px-4 py-2 text-sm font-medium bg-coral text-white border border-coral rounded-lg"
+      >
+        All Recipes
+      </a>
+      {Object.entries(categoryInfo).map(([key, info]) => {
+        const count = categoryCounts[key] || 0;
+        if (count === 0) return null;
+        return (
+          <a
+            href={`/recipes/category/${key}`}
+            class="px-4 py-2 text-sm font-medium border border-gray-border rounded-lg hover:border-coral hover:text-coral transition-colors"
+          >
+            {info.emoji} {info.name}
+            <span class="ml-1 text-gray-mid">({count})</span>
+          </a>
+        );
+      })}
+    </div>
+
+    <!-- Quick Filters -->
+    <div class="mb-8 flex flex-wrap gap-2 justify-center">
+      <div class="text-xs text-gray-mid font-medium uppercase tracking-wide mb-2 w-full text-center">
+        Quick Filters
+      </div>
+      <button
+        class="filter-tag px-3 py-1 text-sm border border-gray-border rounded-full hover:border-coral hover:text-coral transition-colors"
+        data-filter="30-minute"
+      >
+        ⏱️ 30 Minutes or Less
+      </button>
+      <button
+        class="filter-tag px-3 py-1 text-sm border border-gray-border rounded-full hover:border-coral hover:text-coral transition-colors"
+        data-filter="vegetarian"
+      >
+        🥬 Vegetarian
+      </button>
+      <button
+        class="filter-tag px-3 py-1 text-sm border border-gray-border rounded-full hover:border-coral hover:text-coral transition-colors"
+        data-filter="one-pan"
+      >
+        🍳 One-Pan
+      </button>
+      <button
+        class="filter-tag px-3 py-1 text-sm border border-gray-border rounded-full hover:border-coral hover:text-coral transition-colors"
+        data-filter="comfort-food"
+      >
+        🍲 Comfort Food
+      </button>
+    </div>
+
+    <!-- Recipe Grid -->
     {recipes.length > 0 ? (
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="recipe-grid">
         {recipes.map((recipe) => (
-          <RecipeCard
-            title={recipe.data.title}
-            description={recipe.data.description}
-            slug={recipe.id}
-            prepTime={recipe.data.prepTime}
-            cookTime={recipe.data.cookTime}
-            category={recipe.data.category}
-            image={recipe.data.image}
-            imageAlt={recipe.data.imageAlt}
-          />
+          <div
+            class="recipe-item"
+            data-tags={recipe.data.tags?.join(' ')}
+            data-time={recipe.data.totalTime || recipe.data.cookTime}
+            data-category={recipe.data.category}
+          >
+            <RecipeCard
+              title={recipe.data.title}
+              description={recipe.data.description}
+              slug={recipe.id}
+              prepTime={recipe.data.prepTime}
+              cookTime={recipe.data.cookTime}
+              category={recipe.data.category}
+              image={recipe.data.image}
+              imageAlt={recipe.data.imageAlt}
+              tags={recipe.data.tags}
+            />
+          </div>
         ))}
       </div>
     ) : (
       <p class="text-gray-mid text-center py-12">Recipes coming soon.</p>
     )}
+
+    <!-- No results message -->
+    <div id="no-results" class="hidden text-center py-12">
+      <p class="text-gray-mid mb-4">No recipes match your filter.</p>
+      <button
+        id="clear-filters"
+        class="text-coral hover:text-coral-dark transition-colors"
+      >
+        Clear filters
+      </button>
+    </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Client-side filtering
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterTags = document.querySelectorAll('.filter-tag');
+    const recipeItems = document.querySelectorAll('.recipe-item');
+    const noResults = document.getElementById('no-results');
+    const clearButton = document.getElementById('clear-filters');
+    let activeFilter = null;
+
+    filterTags.forEach(tag => {
+      tag.addEventListener('click', () => {
+        const filter = tag.dataset.filter;
+
+        // Toggle filter
+        if (activeFilter === filter) {
+          activeFilter = null;
+          tag.classList.remove('bg-coral', 'text-white', 'border-coral');
+        } else {
+          // Remove active state from all
+          filterTags.forEach(t => {
+            t.classList.remove('bg-coral', 'text-white', 'border-coral');
+          });
+          // Add active state to clicked
+          tag.classList.add('bg-coral', 'text-white', 'border-coral');
+          activeFilter = filter;
+        }
+
+        // Apply filter
+        let visibleCount = 0;
+        recipeItems.forEach(item => {
+          const tags = item.dataset.tags || '';
+          const time = parseInt(item.dataset.time) || 999;
+          let show = true;
+
+          if (activeFilter === '30-minute') {
+            show = time <= 30;
+          } else if (activeFilter) {
+            show = tags.includes(activeFilter);
+          }
+
+          if (show) {
+            item.style.display = '';
+            visibleCount++;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        // Show/hide no results message
+        if (visibleCount === 0) {
+          noResults?.classList.remove('hidden');
+        } else {
+          noResults?.classList.add('hidden');
+        }
+      });
+    });
+
+    // Clear filters
+    clearButton?.addEventListener('click', () => {
+      activeFilter = null;
+      filterTags.forEach(t => {
+        t.classList.remove('bg-coral', 'text-white', 'border-coral');
+      });
+      recipeItems.forEach(item => {
+        item.style.display = '';
+      });
+      noResults?.classList.add('hidden');
+    });
+  });
+</script>
+
+<style>
+  .filter-tag {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .recipe-item {
+    transition: opacity 0.2s ease;
+  }
+</style>
