@@ -4,8 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://rtsdrums-eng.github.io',
-  base: '/cookthis',
+  site: 'https://cookthis.com',
   output: 'static',
   vite: {
     plugins: [tailwindcss()]
