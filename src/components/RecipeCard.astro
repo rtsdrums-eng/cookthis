@@ -14,7 +14,7 @@ interface Props {
 const { title, description, slug, prepTime, cookTime, category, image, imageAlt, tags = [] } = Astro.props;
 
 // Generate Unsplash image URL if no image provided
-const imageUrl = image || `https://source.unsplash.com/800x600/?${encodeURIComponent(title.replace(/\s+/g, ','))},food,recipe`;
+const imageUrl = image || `https://source.unsplash.com/800x600/?${encodeURIComponent((title || 'recipe').replace(/\s+/g, ','))},food,recipe`;
 
 // Check if it's a quick recipe (30 minutes or less)
 const totalTime = Number(cookTime) + Number(prepTime || 0);
