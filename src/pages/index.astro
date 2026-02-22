@@ -4,7 +4,18 @@ import MinimalRecipeCard from "../components/MinimalRecipeCard.astro";
 import { getCollection } from "astro:content";
 
 const allRecipes = await getCollection("recipes", ({ data }) => !data.draft);
-const recipes = allRecipes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+// Sort by sortOrder if present, otherwise by date
+const recipes = allRecipes.sort((a, b) => {
+  // First check if both have sortOrder
+  if (a.data.sortOrder !== undefined && b.data.sortOrder !== undefined) {
+    return a.data.sortOrder - b.data.sortOrder;
+  }
+  // If only one has sortOrder, prioritize it
+  if (a.data.sortOrder !== undefined) return -1;
+  if (b.data.sortOrder !== undefined) return 1;
+  // Fall back to date sorting (newest first)
+  return b.data.date.valueOf() - a.data.date.valueOf();
+});
 
 // Pagination
 const currentPage = 1;
@@ -166,8 +177,17 @@ const paginatedRecipes = recipes.slice(0, recipesPerPage);
     text-transform: lowercase;
   }
 
-  .nav-submit-btn:hover {
+  .nav-submit-btn:hover:not(:disabled) {
     background: #333;
+  }
+
+  .nav-submit-btn:disabled {
+    cursor: default;
+    opacity: 0.8;
+  }
+
+  .nav-submit-btn.success {
+    background: #4CAF50;
   }
 
   /* Recipes Section */
@@ -300,8 +320,17 @@ const paginatedRecipes = recipes.slice(0, recipesPerPage);
     text-transform: lowercase;
   }
 
-  .submit-btn:hover {
+  .submit-btn:hover:not(:disabled) {
     background: #333;
+  }
+
+  .submit-btn:disabled {
+    cursor: default;
+    opacity: 0.8;
+  }
+
+  .submit-btn.success {
+    background: #4CAF50;
   }
 
   .copyright {
@@ -314,3 +343,76 @@ const paginatedRecipes = recipes.slice(0, recipesPerPage);
     color: #999;
   }
 </style>
+
+<script>
+  // Handle newsletter form submissions with Buttondown
+  document.addEventListener('DOMContentLoaded', () => {
+    async function handleNewsletterSubmit(form, emailInput, button) {
+      const email = emailInput.value.trim();
+      const originalText = button.textContent;
+
+      // Disable button and show loading state
+      button.disabled = true;
+      button.textContent = 'subscribing...';
+
+      try {
+        // Submit to Buttondown embedded endpoint
+        const formData = new FormData();
+        formData.append('email', email);
+
+        await fetch('https://buttondown.com/api/emails/embed-subscribe/cookthis', {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors' // Buttondown embedded endpoint doesn't support CORS
+        });
+
+        // Since no-cors doesn't give us response details, assume success
+        button.textContent = 'subscribed!';
+        button.classList.add('success');
+        emailInput.value = '';
+
+        // Store subscription in localStorage
+        localStorage.setItem('cookthis_newsletter_subscribed', 'true');
+        localStorage.setItem('cookthis_newsletter_email', email);
+
+        // Reset after 3 seconds
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+          button.classList.remove('success');
+        }, 3000);
+
+      } catch (error) {
+        console.error('Subscription error:', error);
+        button.textContent = 'error - try again';
+
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+        }, 3000);
+      }
+    }
+
+    // Handle navbar newsletter form
+    const navForm = document.getElementById('nav-newsletter-form');
+    if (navForm) {
+      navForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emailInput = navForm.querySelector('input[type="email"]');
+        const button = navForm.querySelector('button');
+        await handleNewsletterSubmit(navForm, emailInput, button);
+      });
+    }
+
+    // Handle footer newsletter form
+    const footerForm = document.getElementById('newsletter-form');
+    if (footerForm) {
+      footerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emailInput = footerForm.querySelector('input[type="email"]');
+        const button = footerForm.querySelector('button');
+        await handleNewsletterSubmit(footerForm, emailInput, button);
+      });
+    }
+  });
+</script>
