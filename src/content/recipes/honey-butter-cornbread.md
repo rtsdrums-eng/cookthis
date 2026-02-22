@@ -8,8 +8,8 @@ totalTime: 30
 servings: 4
 category: "side"
 tags: ["side", "vegetarian", "30-minute", "comfort-food", "american"]
-image: "/images/honey-butter-cornbread.jpg"
-imageAlt: "Golden cornbread squares topped with melting honey butter"
+# image: "/images/honey-butter-cornbread.jpg"
+# imageAlt: "Golden cornbread squares topped with melting honey butter"
 date: 2026-02-22
 draft: false
 ---

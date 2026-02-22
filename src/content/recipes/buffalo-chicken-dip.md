@@ -8,8 +8,8 @@ totalTime: 30
 servings: 4
 category: "snack"
 tags: ["snack", "chicken", "30-minute", "appetizer", "comfort-food"]
-image: "/images/buffalo-chicken-dip.jpg"
-imageAlt: "Bubbly buffalo chicken dip in a baking dish with tortilla chips"
+# image: "/images/buffalo-chicken-dip.jpg"
+# imageAlt: "Bubbly buffalo chicken dip in a baking dish with tortilla chips"
 date: 2026-02-22
 draft: false
 ---

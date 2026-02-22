@@ -8,8 +8,8 @@ totalTime: 30
 servings: 4
 category: "dessert"
 tags: ["dessert", "asian", "vegetarian", "30-minute", "no-cook"]
-image: "/images/mango-sticky-rice.jpg"
-imageAlt: "Thai mango sticky rice with coconut cream drizzle on a plate"
+# image: "/images/mango-sticky-rice.jpg"
+# imageAlt: "Thai mango sticky rice with coconut cream drizzle on a plate"
 date: 2026-02-22
 draft: false
 ---

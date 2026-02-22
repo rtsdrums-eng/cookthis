@@ -8,8 +8,8 @@ totalTime: 20
 servings: 4
 category: "snack"
 tags: ["snack", "vegetarian", "italian", "appetizer", "quick", "30-minute"]
-image: "/images/caprese-bruschetta.jpg"
-imageAlt: "Rows of bruschetta topped with diced tomatoes, mozzarella, and fresh basil"
+# image: "/images/caprese-bruschetta.jpg"
+# imageAlt: "Rows of bruschetta topped with diced tomatoes, mozzarella, and fresh basil"
 date: 2026-02-22
 draft: false
 ---

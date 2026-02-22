@@ -58,17 +58,17 @@
     border-color: var(--color-coral);
   }
 
-  /* Modal Styles */
+  /* Modal Styles - Minimalist */
   .search-modal {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 10vh;
+    padding-top: 15vh;
   }
 
   .search-modal.hidden {
@@ -77,11 +77,11 @@
 
   .search-modal-content {
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     width: 90%;
-    max-width: 650px;
-    max-height: 70vh;
+    max-width: 600px;
+    max-height: 60vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;

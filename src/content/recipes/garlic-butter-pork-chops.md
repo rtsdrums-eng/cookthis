@@ -8,8 +8,8 @@ totalTime: 20
 servings: 4
 category: "dinner"
 tags: ["pork", "30-minute", "weeknight", "quick", "comfort-food"]
-image: "/images/garlic-butter-pork-chops.jpg"
-imageAlt: "Golden seared pork chops in a skillet with melted garlic herb butter"
+# image: "/images/garlic-butter-pork-chops.jpg"
+# imageAlt: "Golden seared pork chops in a skillet with melted garlic herb butter"
 date: 2026-02-22
 draft: false
 ---

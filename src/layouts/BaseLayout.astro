@@ -24,44 +24,9 @@ const {
     <title>{title}</title>
   </head>
   <body class="bg-cream text-charcoal font-sans min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="no-print border-b border-gray-border">
-      <nav class="max-w-3xl mx-auto px-4 py-5 flex items-center justify-between">
-        <a href="/" class="text-2xl font-bold tracking-tight text-charcoal hover:text-coral transition-colors">
-          CookThis
-        </a>
-        <div class="flex items-center gap-4">
-          <Search />
-          <a href="/recipes" class="text-sm font-medium text-gray-mid hover:text-charcoal transition-colors">
-            Recipes
-          </a>
-          <a
-            href="#newsletter"
-            class="text-sm font-medium bg-coral text-white px-4 py-2 rounded-lg hover:bg-coral-dark transition-colors"
-          >
-            Subscribe
-          </a>
-        </div>
-      </nav>
-    </header>
-
     <!-- Main content -->
     <main class="flex-1">
       <slot />
     </main>
-
-    <!-- Footer -->
-    <footer class="no-print border-t border-gray-border mt-16">
-      <div class="max-w-3xl mx-auto px-4 py-12">
-        <!-- Newsletter signup -->
-        <div id="newsletter" class="mb-10">
-          <NewsletterSignup />
-        </div>
-
-        <div class="text-center text-gray-mid text-xs">
-          <p>&copy; {new Date().getFullYear()} CookThis. No ads, no fluff — just recipes.</p>
-        </div>
-      </div>
-    </footer>
   </body>
 </html>

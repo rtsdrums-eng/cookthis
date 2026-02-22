@@ -8,8 +8,8 @@ totalTime: "45 min"
 servings: 4
 category: "side"
 tags: ["potatoes", "side-dish", "crispy", "vegetarian"]
-image: "/images/smashed-potatoes.jpg"
-imageAlt: "Crispy golden smashed potatoes on a baking sheet with herbs and flaky salt"
+# image: "/images/smashed-potatoes.jpg"
+# imageAlt: "Crispy golden smashed potatoes on a baking sheet with herbs and flaky salt"
 date: 2026-02-18
 draft: false
 ---

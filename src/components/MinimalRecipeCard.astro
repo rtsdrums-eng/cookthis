@@ -1,0 +1,179 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  slug: string;
+  prepTime?: string | number;
+  cookTime?: string | number;
+  category: string;
+  tags?: string[];
+  image?: string;
+}
+
+const { title, description, slug, prepTime, cookTime, category, tags = [], image } = Astro.props;
+
+// Format category display
+const categoryDisplay = category.charAt(0).toUpperCase() + category.slice(1);
+
+// Calculate total time
+const totalTime = Number(cookTime || 0) + Number(prepTime || 0);
+---
+
+<article class="minimal-card group">
+  <a href={`/recipes/${slug}`} class="block">
+    <!-- Clean card with subtle border -->
+    <div class="card-content">
+      <!-- Recipe Image -->
+      {image && (
+        <div class="recipe-image-container">
+          <img src={image} alt={title} class="recipe-image" loading="lazy" />
+        </div>
+      )}
+
+      <div class="card-text-content">
+        <!-- Top row with category and time -->
+        <div class="card-header">
+          <span class="category-label">{categoryDisplay}</span>
+          {totalTime > 0 && (
+            <span class="time-label">{totalTime} min</span>
+          )}
+        </div>
+
+        <!-- Title with refined typography -->
+        <h3 class="recipe-title">{title}</h3>
+
+        <!-- Description -->
+        {description && (
+          <p class="recipe-description">{description}</p>
+        )}
+
+        <!-- Subtle arrow on hover -->
+        <div class="card-action">
+          <span class="view-recipe">View Recipe</span>
+          <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M7 17l10-10M17 7v10m0-10H7"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .minimal-card {
+    background: transparent;
+    position: relative;
+    height: 100%;
+  }
+
+  .card-content {
+    background: white;
+    border: 1px solid #f0f0f0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    overflow: hidden;
+  }
+
+  /* Image Container with strict 3:2 aspect ratio */
+  .recipe-image-container {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: #f8f8f8;
+  }
+
+  .recipe-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .minimal-card:hover .recipe-image {
+    transform: scale(1.05);
+  }
+
+  .card-text-content {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .minimal-card:hover .card-content {
+    border-color: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .category-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #999;
+  }
+
+  .time-label {
+    font-size: 11px;
+    color: #b0b0b0;
+    font-weight: 400;
+  }
+
+  .recipe-title {
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.3;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .recipe-description {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #666;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid #f8f8f8;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .minimal-card:hover .card-action {
+    opacity: 1;
+  }
+
+  .view-recipe {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+
+  .arrow-icon {
+    color: #999;
+    transition: transform 0.3s ease;
+  }
+
+  .minimal-card:hover .arrow-icon {
+    transform: translate(2px, -2px);
+  }
+</style>

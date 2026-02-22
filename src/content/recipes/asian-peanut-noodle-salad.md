@@ -8,8 +8,8 @@ totalTime: 25
 servings: 4
 category: "lunch"
 tags: ["lunch", "vegetarian", "asian", "30-minute", "healthy", "meal-prep"]
-image: "/images/asian-peanut-noodle-salad.jpg"
-imageAlt: "Cold peanut noodle salad with shredded carrots, cabbage, and cilantro"
+# image: "/images/asian-peanut-noodle-salad.jpg"
+# imageAlt: "Cold peanut noodle salad with shredded carrots, cabbage, and cilantro"
 date: 2026-02-22
 draft: false
 ---

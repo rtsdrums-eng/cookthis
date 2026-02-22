@@ -8,8 +8,8 @@ totalTime: "45 min"
 servings: 4
 category: "dinner"
 tags: ["chicken", "one-pan", "weeknight", "easy"]
-image: "/images/lemon-herb-chicken.jpg"
-imageAlt: "Golden roasted chicken thighs with lemon slices and herbs in a cast iron pan"
+# image: "/images/lemon-herb-chicken.jpg"
+# imageAlt: "Golden roasted chicken thighs with lemon slices and herbs in a cast iron pan"
 date: 2026-02-22
 draft: false
 ---

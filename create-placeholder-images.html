@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Placeholder Images</title>
+    <style>
+        body {
+            font-family: system-ui;
+            padding: 20px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 10px;
+            display: block;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipe Image Placeholders (3:2 ratio - 900x600px)</h1>
+
+    <canvas id="avocado" width="900" height="600"></canvas>
+    <button onclick="downloadCanvas('avocado', 'avocado-toast.jpg')">Download Avocado Toast</button>
+
+    <canvas id="burrito" width="900" height="600"></canvas>
+    <button onclick="downloadCanvas('burrito', 'breakfast-burrito.jpg')">Download Breakfast Burrito</button>
+
+    <canvas id="shakshuka" width="900" height="600"></canvas>
+    <button onclick="downloadCanvas('shakshuka', 'shakshuka.jpg')">Download Shakshuka</button>
+
+    <script>
+        // Avocado Toast - Green tones
+        const avocadoCanvas = document.getElementById('avocado');
+        const avocadoCtx = avocadoCanvas.getContext('2d');
+        const avocadoGradient = avocadoCtx.createLinearGradient(0, 0, 900, 600);
+        avocadoGradient.addColorStop(0, '#8BC34A');
+        avocadoGradient.addColorStop(1, '#689F38');
+        avocadoCtx.fillStyle = avocadoGradient;
+        avocadoCtx.fillRect(0, 0, 900, 600);
+        avocadoCtx.fillStyle = 'white';
+        avocadoCtx.font = 'bold 48px system-ui';
+        avocadoCtx.textAlign = 'center';
+        avocadoCtx.fillText('Avocado Toast', 450, 300);
+
+        // Breakfast Burrito - Warm orange/yellow tones
+        const burritoCanvas = document.getElementById('burrito');
+        const burritoCtx = burritoCanvas.getContext('2d');
+        const burritoGradient = burritoCtx.createLinearGradient(0, 0, 900, 600);
+        burritoGradient.addColorStop(0, '#FF9800');
+        burritoGradient.addColorStop(1, '#F57C00');
+        burritoCtx.fillStyle = burritoGradient;
+        burritoCtx.fillRect(0, 0, 900, 600);
+        burritoCtx.fillStyle = 'white';
+        burritoCtx.font = 'bold 48px system-ui';
+        burritoCtx.textAlign = 'center';
+        burritoCtx.fillText('Breakfast Burrito', 450, 300);
+
+        // Shakshuka - Red tones
+        const shakshukaCanvas = document.getElementById('shakshuka');
+        const shakshukaCtx = shakshukaCanvas.getContext('2d');
+        const shakshukaGradient = shakshukaCtx.createLinearGradient(0, 0, 900, 600);
+        shakshukaGradient.addColorStop(0, '#F44336');
+        shakshukaGradient.addColorStop(1, '#D32F2F');
+        shakshukaCtx.fillStyle = shakshukaGradient;
+        shakshukaCtx.fillRect(0, 0, 900, 600);
+        shakshukaCtx.fillStyle = 'white';
+        shakshukaCtx.font = 'bold 48px system-ui';
+        shakshukaCtx.textAlign = 'center';
+        shakshukaCtx.fillText('Shakshuka', 450, 300);
+
+        function downloadCanvas(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
+            link.click();
+        }
+    </script>
+</body>
+</html>

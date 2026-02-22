@@ -8,8 +8,8 @@ totalTime: 25
 servings: 4
 category: "dinner"
 tags: ["chicken", "30-minute", "weeknight", "comfort-food", "one-pan"]
-image: "/images/creamy-tuscan-chicken.jpg"
-imageAlt: "Chicken breasts in a creamy sauce with sun-dried tomatoes and spinach"
+# image: "/images/creamy-tuscan-chicken.jpg"
+# imageAlt: "Chicken breasts in a creamy sauce with sun-dried tomatoes and spinach"
 date: 2026-02-22
 draft: false
 ---

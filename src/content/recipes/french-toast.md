@@ -8,8 +8,8 @@ totalTime: 20
 servings: 4
 category: "breakfast"
 tags: ["breakfast", "vegetarian", "30-minute", "comfort-food", "american"]
-image: "/images/french-toast.jpg"
-imageAlt: "Stack of golden French toast dusted with powdered sugar and topped with berries"
+# image: "/images/french-toast.jpg"
+# imageAlt: "Stack of golden French toast dusted with powdered sugar and topped with berries"
 date: 2026-02-22
 draft: false
 ---

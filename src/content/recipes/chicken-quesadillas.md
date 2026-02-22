@@ -8,8 +8,8 @@ totalTime: 25
 servings: 4
 category: "dinner"
 tags: ["30-minute", "chicken", "weeknight", "comfort-food", "quick"]
-image: "/images/chicken-quesadillas.jpg"
-imageAlt: "Golden crispy chicken quesadillas cut into triangles with salsa and sour cream"
+# image: "/images/chicken-quesadillas.jpg"
+# imageAlt: "Golden crispy chicken quesadillas cut into triangles with salsa and sour cream"
 date: 2026-02-22
 draft: false
 ---

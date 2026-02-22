@@ -8,8 +8,8 @@ totalTime: 20
 servings: 4
 category: "lunch"
 tags: ["lunch", "quick", "30-minute", "american", "comfort-food"]
-image: "/images/classic-blt-with-avocado.jpg"
-imageAlt: "Stacked BLT sandwich with avocado slices on toasted bread"
+# image: "/images/classic-blt-with-avocado.jpg"
+# imageAlt: "Stacked BLT sandwich with avocado slices on toasted bread"
 date: 2026-02-22
 draft: false
 ---

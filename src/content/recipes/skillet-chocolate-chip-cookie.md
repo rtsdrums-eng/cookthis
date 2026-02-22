@@ -8,8 +8,8 @@ totalTime: 30
 servings: 4
 category: "dessert"
 tags: ["dessert", "vegetarian", "30-minute", "comfort-food", "american"]
-image: "/images/skillet-chocolate-chip-cookie.jpg"
-imageAlt: "Giant chocolate chip cookie in a cast iron skillet with melty chocolate"
+# image: "/images/skillet-chocolate-chip-cookie.jpg"
+# imageAlt: "Giant chocolate chip cookie in a cast iron skillet with melty chocolate"
 date: 2026-02-22
 draft: false
 ---

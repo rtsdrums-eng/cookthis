@@ -24,47 +24,32 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
 ---
 
 <BaseLayout title={`${title} — CookThis`} description={description}>
-  <article class="max-w-3xl mx-auto px-4 py-12">
+  <article class="max-w-2xl mx-auto px-4 py-8">
     <!-- Back link -->
-    <a href="/recipes" class="no-print text-sm text-gray-mid hover:text-coral transition-colors mb-6 inline-block">
-      &larr; All Recipes
+    <a href="/" class="no-print text-xs text-gray-400 hover:text-gray-600 transition-colors mb-4 inline-block">
+      ← back
     </a>
 
-    <!-- Recipe header -->
-    <header class="mb-8">
-      <span class="text-xs font-medium uppercase tracking-wide text-coral">{category}</span>
-      <h1 class="text-3xl md:text-4xl font-bold mt-2 mb-3">{title}</h1>
-      <p class="text-gray-mid text-lg leading-relaxed">{description}</p>
+    <!-- Recipe header - simplified -->
+    <header class="mb-6">
+      <h1 class="text-2xl font-semibold mb-2">{title}</h1>
+      <p class="text-gray-600 text-sm leading-relaxed mb-3">{description}</p>
 
-      <!-- Meta info -->
-      <div class="flex flex-wrap gap-4 mt-5 text-sm text-gray-mid">
-        <div>
-          <span class="font-medium text-charcoal">Prep:</span> {prepTime}
-        </div>
-        <div>
-          <span class="font-medium text-charcoal">Cook:</span> {cookTime}
-        </div>
-        {totalTime && (
-          <div>
-            <span class="font-medium text-charcoal">Total:</span> {totalTime}
-          </div>
-        )}
-        <div>
-          <span class="font-medium text-charcoal">Servings:</span> {servings}
-        </div>
-      </div>
-
-      <!-- Author & date -->
-      <div class="flex items-center gap-3 mt-4 text-xs text-gray-mid">
-        <span>By {author}</span>
-        <span class="text-gray-border">|</span>
-        <time datetime={date.toISOString()}>{formattedDate}</time>
+      <!-- Meta info - compact -->
+      <div class="flex flex-wrap gap-3 text-xs text-gray-500">
+        <span>{category}</span>
+        <span>•</span>
+        <span>prep: {prepTime} min</span>
+        <span>•</span>
+        <span>cook: {cookTime} min</span>
+        <span>•</span>
+        <span>serves {servings}</span>
       </div>
     </header>
 
-    <!-- Hero image -->
+    <!-- Hero image with strict sizing (3:2 aspect ratio) -->
     {image && (
-      <div class="rounded-xl overflow-hidden mb-8 max-h-96">
+      <div class="recipe-hero-image mb-6">
         <img
           src={image}
           alt={imageAlt || title}
@@ -74,86 +59,107 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
     )}
 
     <!-- Action buttons -->
-    <div class="no-print flex gap-3 mb-8">
+    <div class="no-print flex gap-2 mb-6">
       <CopyButton />
       <PrintButton />
     </div>
 
     <!-- Recipe content -->
-    <div class="recipe-content prose prose-lg max-w-none">
+    <div class="recipe-content">
       <Content />
     </div>
   </article>
 </BaseLayout>
 
+<style>
+  /* Hero image with strict 3:2 aspect ratio */
+  .recipe-hero-image {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: #f8f8f8;
+    border-radius: 0.25rem;
+  }
+</style>
+
 <style is:global>
+  /* Simple, Notion-like typography */
   .recipe-content h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--color-gray-border);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
   }
 
+  /* Ingredients - simple list */
   .recipe-content ul {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
 
   .recipe-content ul li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--color-gray-border);
-    font-size: 0.95rem;
+    padding: 0.375rem 0;
+    font-size: 0.875rem;
+    color: #333;
+    line-height: 1.5;
   }
 
-  .recipe-content ul li:last-child {
-    border-bottom: none;
+  .recipe-content ul li::before {
+    content: "•";
+    color: #999;
+    display: inline-block;
+    width: 1rem;
+    margin-right: 0.25rem;
   }
 
+  /* Instructions - numbered steps */
   .recipe-content ol {
     list-style: none;
     padding: 0;
+    margin: 0;
     counter-reset: steps;
   }
 
   .recipe-content ol li {
     counter-increment: steps;
-    padding: 0.75rem 0;
-    padding-left: 2.5rem;
+    padding: 0.5rem 0 0.5rem 1.75rem;
     position: relative;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    border-bottom: 1px solid var(--color-gray-border);
-  }
-
-  .recipe-content ol li:last-child {
-    border-bottom: none;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #333;
   }
 
   .recipe-content ol li::before {
-    content: counter(steps);
+    content: counter(steps) ".";
     position: absolute;
     left: 0;
-    top: 0.75rem;
-    width: 1.75rem;
-    height: 1.75rem;
-    background: var(--color-coral);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 600;
+    top: 0.5rem;
+    color: #666;
+    font-size: 0.875rem;
+    font-weight: 500;
   }
 
-  /* Notes section */
-  .recipe-content h2:last-of-type + p {
-    background: var(--color-gray-light);
-    padding: 1rem 1.25rem;
-    border-radius: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--color-gray-mid);
+  /* Notes section - subtle background */
+  .recipe-content blockquote,
+  .recipe-content h2:last-of-type + p,
+  .recipe-content h2:last-of-type + ul {
+    background: #f8f8f8;
+    border-left: 2px solid #e0e0e0;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  /* Remove excessive spacing */
+  .recipe-content > * {
+    margin-bottom: 1rem;
+  }
+
+  .recipe-content h2 + ul,
+  .recipe-content h2 + ol {
+    margin-top: 0.25rem;
   }
 </style>

@@ -8,8 +8,8 @@ totalTime: 10
 servings: 4
 category: "side"
 tags: ["side", "vegetarian", "vegan", "mediterranean", "15-minute", "quick", "healthy"]
-image: "/images/roasted-garlic-hummus.jpg"
-imageAlt: "Creamy hummus drizzled with olive oil and paprika served with pita bread"
+# image: "/images/roasted-garlic-hummus.jpg"
+# imageAlt: "Creamy hummus drizzled with olive oil and paprika served with pita bread"
 date: 2026-02-22
 draft: false
 ---

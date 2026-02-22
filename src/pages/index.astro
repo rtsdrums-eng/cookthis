@@ -1,44 +1,316 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import RecipeCard from "../components/RecipeCard.astro";
+import MinimalRecipeCard from "../components/MinimalRecipeCard.astro";
 import { getCollection } from "astro:content";
 
 const allRecipes = await getCollection("recipes", ({ data }) => !data.draft);
 const recipes = allRecipes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Pagination
+const currentPage = 1;
+const recipesPerPage = 9;
+const totalPages = Math.ceil(recipes.length / recipesPerPage);
+const paginatedRecipes = recipes.slice(0, recipesPerPage);
 ---
 
 <BaseLayout>
-  <!-- Hero -->
-  <section class="max-w-3xl mx-auto px-4 py-16 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-      No fluff. Just <span class="text-coral">cook this</span>.
-    </h1>
-    <p class="text-gray-mid text-lg max-w-xl mx-auto">
-      Easy, delicious recipes for couples and families. No ads, no life stories, no endless scrolling. Just the recipe.
-    </p>
-  </section>
-
-  <!-- Recipe grid -->
-  <section class="max-w-3xl mx-auto px-4 pb-16">
-    <h2 class="text-sm font-medium uppercase tracking-wide text-gray-mid mb-6">Latest Recipes</h2>
-    {recipes.length > 0 ? (
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {recipes.map((recipe) => (
-          <RecipeCard
-            title={recipe.data.title}
-            description={recipe.data.description}
-            slug={recipe.id}
-            prepTime={recipe.data.prepTime}
-            cookTime={recipe.data.cookTime}
-            category={recipe.data.category}
-            image={recipe.data.image}
-            imageAlt={recipe.data.imageAlt}
-            tags={recipe.data.tags}
+  <div class="minimal-layout">
+    <!-- Simplified Navigation Bar -->
+    <nav class="nav-bar">
+      <div class="nav-container">
+        <a href="/" class="logo">cookthis</a>
+        <form class="nav-newsletter-form" id="nav-newsletter-form">
+          <input
+            type="email"
+            placeholder="enter your email"
+            class="nav-email-input"
+            required
           />
-        ))}
+          <button type="submit" class="nav-submit-btn">subscribe</button>
+        </form>
       </div>
-    ) : (
-      <p class="text-gray-mid text-center py-12">Recipes coming soon.</p>
-    )}
-  </section>
+    </nav>
+
+    <!-- Recipe Grid - 9 cards -->
+    <section class="recipes-section">
+      <div class="recipes-container">
+        <div class="recipes-grid">
+          {paginatedRecipes.map((recipe) => (
+            <MinimalRecipeCard
+              title={recipe.data.title}
+              description={recipe.data.description}
+              slug={recipe.id}
+              prepTime={recipe.data.prepTime}
+              cookTime={recipe.data.cookTime}
+              category={recipe.data.category}
+              tags={recipe.data.tags}
+              image={recipe.data.image}
+            />
+          ))}
+        </div>
+
+        <!-- Pagination -->
+        {totalPages > 1 && (
+          <div class="pagination">
+            <button class="page-arrow" disabled={currentPage === 1}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+            <span class="page-info">{currentPage} / {totalPages}</span>
+            <button class="page-arrow" disabled={currentPage === totalPages}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Footer with Newsletter -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="newsletter-inline">
+          <form class="newsletter-form" id="newsletter-form">
+            <input
+              type="email"
+              placeholder="enter your email for weekly recipes"
+              class="email-input"
+              required
+            />
+            <button type="submit" class="submit-btn">subscribe</button>
+          </form>
+        </div>
+        <div class="copyright">
+          <p>© 2026 CookThis. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
 </BaseLayout>
+
+<style>
+  .minimal-layout {
+    min-height: 100vh;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Navigation */
+  .nav-bar {
+    border-top: 2px solid #1a1a1a;
+    border-bottom: 1px solid #f0f0f0;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #1a1a1a;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  /* Navbar Newsletter Form */
+  .nav-newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .nav-email-input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #e0e0e0;
+    background: #fafafa;
+    font-size: 13px;
+    width: 200px;
+    transition: all 0.3s ease;
+    text-transform: lowercase;
+  }
+
+  .nav-email-input::placeholder {
+    color: #999;
+    text-transform: none;
+  }
+
+  .nav-email-input:focus {
+    outline: none;
+    border-color: #999;
+    background: white;
+  }
+
+  .nav-submit-btn {
+    padding: 0.5rem 1rem;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-transform: lowercase;
+  }
+
+  .nav-submit-btn:hover {
+    background: #333;
+  }
+
+  /* Recipes Section */
+  .recipes-section {
+    flex: 1;
+    padding: 3rem 0;
+  }
+
+  .recipes-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 1024px) {
+    .recipes-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .recipes-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .page-arrow {
+    background: none;
+    border: 1px solid #e0e0e0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+  }
+
+  .page-arrow:hover:not(:disabled) {
+    border-color: #999;
+    color: #1a1a1a;
+  }
+
+  .page-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .page-info {
+    font-size: 13px;
+    color: #999;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  /* Footer */
+  .footer {
+    background: white;
+    border-top: 1px solid #f0f0f0;
+    padding: 3rem 0 2rem;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .newsletter-inline {
+    margin-bottom: 2rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 400px;
+  }
+
+  .email-input {
+    flex: 1;
+    padding: 0.625rem 1rem;
+    border: 1px solid #e0e0e0;
+    background: #fafafa;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    text-transform: lowercase;
+  }
+
+  .email-input::placeholder {
+    color: #999;
+    text-transform: none;
+  }
+
+  .email-input:focus {
+    outline: none;
+    border-color: #999;
+    background: white;
+  }
+
+  .submit-btn {
+    padding: 0.625rem 1.5rem;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-transform: lowercase;
+  }
+
+  .submit-btn:hover {
+    background: #333;
+  }
+
+  .copyright {
+    padding-top: 1.5rem;
+    border-top: 1px solid #f8f8f8;
+  }
+
+  .copyright p {
+    font-size: 12px;
+    color: #999;
+  }
+</style>

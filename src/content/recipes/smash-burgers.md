@@ -8,8 +8,8 @@ totalTime: 20
 servings: 4
 category: "dinner"
 tags: ["beef", "quick", "30-minute", "american", "comfort-food"]
-image: "/images/smash-burgers.jpg"
-imageAlt: "Double smash burgers with melted American cheese on toasted buns"
+# image: "/images/smash-burgers.jpg"
+# imageAlt: "Double smash burgers with melted American cheese on toasted buns"
 date: 2026-02-22
 draft: false
 ---

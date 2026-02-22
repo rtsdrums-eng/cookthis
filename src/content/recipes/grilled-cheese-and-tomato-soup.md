@@ -8,8 +8,8 @@ totalTime: 25
 servings: 4
 category: "lunch"
 tags: ["lunch", "vegetarian", "30-minute", "comfort-food", "american"]
-image: "/images/grilled-cheese-and-tomato-soup.jpg"
-imageAlt: "Golden grilled cheese sandwiches next to a bowl of creamy tomato soup"
+# image: "/images/grilled-cheese-and-tomato-soup.jpg"
+# imageAlt: "Golden grilled cheese sandwiches next to a bowl of creamy tomato soup"
 date: 2026-02-22
 draft: false
 ---

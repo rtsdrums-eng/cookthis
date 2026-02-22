@@ -8,8 +8,8 @@ totalTime: 25
 servings: 4
 category: "breakfast"
 tags: ["breakfast", "pork", "30-minute", "comfort-food", "american"]
-image: "/images/country-sausage-gravy-and-biscuits.jpg"
-imageAlt: "Warm biscuits smothered in thick white sausage gravy with black pepper"
+# image: "/images/country-sausage-gravy-and-biscuits.jpg"
+# imageAlt: "Warm biscuits smothered in thick white sausage gravy with black pepper"
 date: 2026-02-22
 draft: false
 ---

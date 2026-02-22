@@ -8,8 +8,8 @@ totalTime: 25
 servings: 4
 category: "breakfast"
 tags: ["breakfast", "eggs", "vegetarian", "mediterranean", "30-minute", "one-pan"]
-image: "/images/shakshuka.jpg"
-imageAlt: "Eggs poached in a vibrant red tomato sauce with crumbled feta and fresh herbs"
+# image: "/images/recipes/shakshuka.jpg"
+# imageAlt: "Eggs poached in a vibrant red tomato sauce with crumbled feta and fresh herbs"
 date: 2026-02-22
 draft: false
 ---

@@ -8,8 +8,8 @@ totalTime: 18
 servings: 4
 category: "lunch"
 tags: ["lunch", "vegetarian", "italian", "15-minute", "quick"]
-image: "/images/caprese-panini.jpg"
-imageAlt: "Pressed caprese panini cut in half showing melted mozzarella, tomato, and basil"
+# image: "/images/caprese-panini.jpg"
+# imageAlt: "Pressed caprese panini cut in half showing melted mozzarella, tomato, and basil"
 date: 2026-02-22
 draft: false
 ---

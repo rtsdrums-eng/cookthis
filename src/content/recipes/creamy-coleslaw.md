@@ -8,8 +8,8 @@ totalTime: 15
 servings: 4
 category: "side"
 tags: ["side", "vegetarian", "15-minute", "quick", "american"]
-image: "/images/creamy-coleslaw.jpg"
-imageAlt: "Bowl of creamy coleslaw with shredded cabbage and carrots"
+# image: "/images/creamy-coleslaw.jpg"
+# imageAlt: "Bowl of creamy coleslaw with shredded cabbage and carrots"
 date: 2026-02-22
 draft: false
 ---

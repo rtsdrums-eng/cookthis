@@ -8,8 +8,8 @@ totalTime: 15
 servings: 4
 category: "side"
 tags: ["side", "vegetarian", "vegan", "asian", "15-minute", "quick", "healthy"]
-image: "/images/sesame-ginger-cucumber-salad.jpg"
-imageAlt: "Smashed cucumber salad with sesame seeds and red pepper flakes in a bowl"
+# image: "/images/sesame-ginger-cucumber-salad.jpg"
+# imageAlt: "Smashed cucumber salad with sesame seeds and red pepper flakes in a bowl"
 date: 2026-02-22
 draft: false
 ---

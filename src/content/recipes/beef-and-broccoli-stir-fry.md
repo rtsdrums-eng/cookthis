@@ -8,8 +8,8 @@ totalTime: 25
 servings: 4
 category: "dinner"
 tags: ["beef", "30-minute", "weeknight", "quick", "asian"]
-image: "/images/beef-and-broccoli-stir-fry.jpg"
-imageAlt: "Beef and broccoli stir fry in a glossy brown sauce over steamed rice"
+# image: "/images/beef-and-broccoli-stir-fry.jpg"
+# imageAlt: "Beef and broccoli stir fry in a glossy brown sauce over steamed rice"
 date: 2026-02-22
 draft: false
 ---

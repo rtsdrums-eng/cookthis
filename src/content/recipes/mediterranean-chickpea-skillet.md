@@ -8,8 +8,8 @@ totalTime: 20
 servings: 4
 category: "dinner"
 tags: ["vegetarian", "mediterranean", "30-minute", "one-pan", "healthy", "weeknight"]
-image: "/images/mediterranean-chickpea-skillet.jpg"
-imageAlt: "One-pan Mediterranean chickpea skillet with feta, olives, and fresh herbs"
+# image: "/images/mediterranean-chickpea-skillet.jpg"
+# imageAlt: "One-pan Mediterranean chickpea skillet with feta, olives, and fresh herbs"
 date: 2026-02-22
 draft: false
 ---

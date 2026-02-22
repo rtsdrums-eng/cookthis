@@ -15,6 +15,8 @@
     "tailwindcss": "^4.2.0"
   },
   "devDependencies": {
-    "pagefind": "^1.4.0"
+    "@tinacms/cli": "^2.1.6",
+    "pagefind": "^1.4.0",
+    "tinacms": "^3.5.0"
   }
 }

@@ -8,8 +8,8 @@ totalTime: 15
 servings: 4
 category: "lunch"
 tags: ["lunch", "chicken", "15-minute", "quick", "healthy"]
-image: "/images/chicken-caesar-wraps.jpg"
-imageAlt: "Chicken Caesar wrap sliced in half showing romaine, chicken, and Parmesan"
+# image: "/images/chicken-caesar-wraps.jpg"
+# imageAlt: "Chicken Caesar wrap sliced in half showing romaine, chicken, and Parmesan"
 date: 2026-02-22
 draft: false
 ---

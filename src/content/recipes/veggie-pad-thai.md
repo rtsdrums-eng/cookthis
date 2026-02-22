@@ -8,8 +8,8 @@ totalTime: 25
 servings: 4
 category: "dinner"
 tags: ["vegetarian", "asian", "30-minute", "weeknight", "healthy"]
-image: "/images/veggie-pad-thai.jpg"
-imageAlt: "Colorful vegetarian pad thai with rice noodles, tofu, bean sprouts, and peanuts"
+# image: "/images/veggie-pad-thai.jpg"
+# imageAlt: "Colorful vegetarian pad thai with rice noodles, tofu, bean sprouts, and peanuts"
 date: 2026-02-22
 draft: false
 ---

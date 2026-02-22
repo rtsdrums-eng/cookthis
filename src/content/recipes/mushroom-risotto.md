@@ -8,8 +8,8 @@ totalTime: 30
 servings: 4
 category: "dinner"
 tags: ["vegetarian", "italian", "30-minute", "date-night", "comfort-food"]
-image: "/images/mushroom-risotto.jpg"
-imageAlt: "Creamy mushroom risotto in a shallow bowl topped with Parmesan and fresh thyme"
+# image: "/images/mushroom-risotto.jpg"
+# imageAlt: "Creamy mushroom risotto in a shallow bowl topped with Parmesan and fresh thyme"
 date: 2026-02-22
 draft: false
 ---

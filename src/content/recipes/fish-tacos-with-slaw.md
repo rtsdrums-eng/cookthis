@@ -8,8 +8,8 @@ totalTime: 20
 servings: 4
 category: "dinner"
 tags: ["seafood", "mexican", "30-minute", "quick", "weeknight"]
-image: "/images/fish-tacos-with-slaw.jpg"
-imageAlt: "Fish tacos with cabbage slaw and lime crema in corn tortillas"
+# image: "/images/fish-tacos-with-slaw.jpg"
+# imageAlt: "Fish tacos with cabbage slaw and lime crema in corn tortillas"
 date: 2026-02-22
 draft: false
 ---
