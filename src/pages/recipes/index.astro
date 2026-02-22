@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RecipeCard from "../../components/RecipeCard.astro";
+import { getCollection } from "astro:content";
+
+const allRecipes = await getCollection("recipes", ({ data }) => !data.draft);
+const recipes = allRecipes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="All Recipes — CookThis" description="Browse all CookThis recipes. Easy, delicious, no-fluff recipes for couples and families.">
+  <section class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-8">All Recipes</h1>
+    {recipes.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {recipes.map((recipe) => (
+          <RecipeCard
+            title={recipe.data.title}
+            description={recipe.data.description}
+            slug={recipe.id}
+            prepTime={recipe.data.prepTime}
+            cookTime={recipe.data.cookTime}
+            category={recipe.data.category}
+            image={recipe.data.image}
+            imageAlt={recipe.data.imageAlt}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-gray-mid text-center py-12">Recipes coming soon.</p>
+    )}
+  </section>
+</BaseLayout>

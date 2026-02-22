@@ -1,0 +1,85 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "CookThis — No-Fluff Recipes for Real Life",
+  description = "Easy, delicious, carefully curated recipes for couples and families. No ads, no life stories — just cook this.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-cream text-charcoal font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="no-print border-b border-gray-border">
+      <nav class="max-w-3xl mx-auto px-4 py-5 flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold tracking-tight text-charcoal hover:text-coral transition-colors">
+          CookThis
+        </a>
+        <div class="flex items-center gap-6">
+          <a href="/recipes" class="text-sm font-medium text-gray-mid hover:text-charcoal transition-colors">
+            Recipes
+          </a>
+          <a
+            href="#newsletter"
+            class="text-sm font-medium bg-coral text-white px-4 py-2 rounded-lg hover:bg-coral-dark transition-colors"
+          >
+            Subscribe
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main content -->
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="no-print border-t border-gray-border mt-16">
+      <div class="max-w-3xl mx-auto px-4 py-12">
+        <!-- Newsletter signup -->
+        <div id="newsletter" class="text-center mb-10">
+          <h3 class="text-lg font-bold mb-2">Get new recipes in your inbox</h3>
+          <p class="text-gray-mid text-sm mb-4">No spam. Just easy, delicious recipes. Unsubscribe anytime.</p>
+          <form
+            action="https://buttondown.com/api/emails/embed-subscribe/cookthis"
+            method="post"
+            target="popupwindow"
+            class="flex gap-2 max-w-md mx-auto"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="you@email.com"
+              required
+              class="flex-1 px-4 py-2 border border-gray-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-coral focus:border-transparent bg-white"
+            />
+            <button
+              type="submit"
+              class="bg-coral text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-coral-dark transition-colors cursor-pointer"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+
+        <div class="text-center text-gray-mid text-xs">
+          <p>&copy; {new Date().getFullYear()} CookThis. No ads, no fluff — just recipes.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

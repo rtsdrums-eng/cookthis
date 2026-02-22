@@ -1,0 +1,34 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div id="newsletter" class={compact ? "" : "text-center"}>
+  {!compact && (
+    <h3 class="text-lg font-bold mb-2">Get new recipes in your inbox</h3>
+    <p class="text-gray-mid text-sm mb-4">No spam. Just easy, delicious recipes. Unsubscribe anytime.</p>
+  )}
+  <form
+    action="https://buttondown.com/api/emails/embed-subscribe/cookthis"
+    method="post"
+    target="popupwindow"
+    class={`flex gap-2 ${compact ? "" : "max-w-md mx-auto"}`}
+  >
+    <input
+      type="email"
+      name="email"
+      placeholder="you@email.com"
+      required
+      class="flex-1 px-4 py-2 border border-gray-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-coral focus:border-transparent bg-white"
+    />
+    <button
+      type="submit"
+      class="bg-coral text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-coral-dark transition-colors cursor-pointer"
+    >
+      Subscribe
+    </button>
+  </form>
+</div>

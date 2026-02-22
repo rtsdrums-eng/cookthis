@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  prepTime: string;
+  cookTime: string;
+  category: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const { title, description, slug, prepTime, cookTime, category, image, imageAlt } = Astro.props;
+---
+
+<a href={`/recipes/${slug}`} class="group block">
+  <article class="border border-gray-border rounded-xl overflow-hidden hover:shadow-md transition-shadow bg-white">
+    {image && (
+      <div class="aspect-[16/10] overflow-hidden">
+        <img
+          src={image}
+          alt={imageAlt || title}
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+    )}
+    <div class="p-5">
+      <span class="text-xs font-medium uppercase tracking-wide text-coral">{category}</span>
+      <h3 class="text-lg font-bold mt-1 mb-2 group-hover:text-coral transition-colors">{title}</h3>
+      <p class="text-gray-mid text-sm leading-relaxed mb-3">{description}</p>
+      <div class="flex gap-3 text-xs text-gray-mid">
+        <span>Prep: {prepTime}</span>
+        <span class="text-gray-border">|</span>
+        <span>Cook: {cookTime}</span>
+      </div>
+    </div>
+  </article>
+</a>
