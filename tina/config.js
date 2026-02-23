@@ -13,6 +13,12 @@ export default defineConfig({
     publicFolder: "public",
   },
 
+  // Add the production URL for authentication
+  cmsCallback: (cms) => {
+    cms.flags.set("tina-admin", true);
+    return cms;
+  },
+
   media: {
     tina: {
       mediaRoot: "",

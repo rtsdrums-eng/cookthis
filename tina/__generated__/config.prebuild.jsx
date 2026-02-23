@@ -1,6 +1,6 @@
 // tina/config.js
 import { defineConfig } from "tinacms";
-var branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
+var branch = "main";
 var config_default = defineConfig({
   branch,
   clientId: "3795c97b-9434-4f41-b7f6-bdafcf6816d3",
@@ -10,6 +10,11 @@ var config_default = defineConfig({
   build: {
     outputFolder: "admin",
     publicFolder: "public"
+  },
+  // Add the production URL for authentication
+  cmsCallback: (cms) => {
+    cms.flags.set("tina-admin", true);
+    return cms;
   },
   media: {
     tina: {
