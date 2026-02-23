@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["vegetarian", "mexican", "30-minute", "quick", "weeknight", "healthy"]
 # image: "/images/black-bean-tacos.jpg"
 # imageAlt: "Black bean tacos topped with avocado, salsa, cilantro, and lime"
-date: 2026-02-22
+date: 2026-02-04
 draft: false
 ---
 

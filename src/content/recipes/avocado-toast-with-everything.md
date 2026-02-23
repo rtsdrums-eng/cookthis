@@ -8,8 +8,8 @@ totalTime: 15
 servings: 4
 category: "breakfast"
 tags: ["breakfast", "eggs", "vegetarian", "15-minute", "quick", "healthy"]
-# image: "/images/recipes/avocado-toast.jpg"
-# imageAlt: "Loaded avocado toast with a soft egg, pickled onions, and everything seasoning"
+image: "/images/loaded-avocado-toast.png"
+imageAlt: "Loaded avocado toast with a soft egg, pickled onions, and everything seasoning"
 date: 2026-02-22
 draft: false
 ---

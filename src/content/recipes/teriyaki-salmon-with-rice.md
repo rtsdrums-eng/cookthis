@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["salmon", "seafood", "asian", "30-minute", "quick", "healthy"]
 # image: "/images/teriyaki-salmon-with-rice.jpg"
 # imageAlt: "Glazed teriyaki salmon fillet over steamed rice with sesame seeds and green onions"
-date: 2026-02-22
+date: 2026-02-04
 draft: false
 ---
 

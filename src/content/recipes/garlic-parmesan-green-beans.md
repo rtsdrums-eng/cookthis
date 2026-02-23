@@ -10,7 +10,7 @@ category: "side"
 tags: ["side", "vegetarian", "15-minute", "quick", "healthy"]
 # image: "/images/garlic-parmesan-green-beans.jpg"
 # imageAlt: "Sautéed green beans topped with Parmesan cheese in a skillet"
-date: 2026-02-22
+date: 2026-02-04
 draft: false
 ---
 

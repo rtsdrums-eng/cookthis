@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["chicken", "italian", "30-minute", "weeknight", "date-night"]
 # image: "/images/caprese-stuffed-chicken.jpg"
 # imageAlt: "Sliced chicken breast stuffed with melted mozzarella, tomato, and basil"
-date: 2026-02-22
+date: 2026-02-09
 draft: false
 ---
 

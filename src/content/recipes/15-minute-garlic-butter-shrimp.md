@@ -8,9 +8,9 @@ totalTime: "15 min"
 servings: 2
 category: "dinner"
 tags: ["shrimp", "quick", "weeknight", "seafood", "date-night"]
-# image: "/images/garlic-butter-shrimp.jpg"
-# imageAlt: "Garlic butter shrimp in a skillet with parsley and lemon wedges"
-date: 2026-02-20
+image: "/images/garlic-butter-shrimp.png"
+imageAlt: "Garlic butter shrimp in a skillet with parsley and lemon wedges"
+date: 2026-02-22
 draft: false
 ---
 

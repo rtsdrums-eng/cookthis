@@ -10,7 +10,7 @@ category: "lunch"
 tags: ["lunch", "vegetarian", "vegan", "mediterranean", "15-minute", "quick", "healthy"]
 # image: "/images/mediterranean-white-bean-salad.jpg"
 # imageAlt: "White bean salad with tomatoes, cucumber, red onion, and fresh herbs in a bowl"
-date: 2026-02-22
+date: 2026-02-13
 draft: false
 ---
 

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import RecipeCard from "../../../components/RecipeCard.astro";
+import MinimalRecipeCard from "../../../components/MinimalRecipeCard.astro";
 import { getCollection } from "astro:content";
 
 // Get category from URL
@@ -145,7 +145,16 @@ const quickRecipes = sortedRecipes.filter(r => {
     {sortedRecipes.length > 0 ? (
       <div class="grid gap-8 md:grid-cols-2">
         {sortedRecipes.map((recipe) => (
-          <RecipeCard recipe={recipe} />
+          <MinimalRecipeCard
+            title={recipe.data.title}
+            description={recipe.data.description}
+            slug={recipe.id}
+            prepTime={recipe.data.prepTime}
+            cookTime={recipe.data.cookTime}
+            category={recipe.data.category}
+            tags={recipe.data.tags}
+            image={recipe.data.image}
+          />
         ))}
       </div>
     ) : (

@@ -10,7 +10,7 @@ category: "lunch"
 tags: ["lunch", "chicken", "mediterranean", "healthy", "30-minute", "gluten-free"]
 # image: "/images/greek-salad-with-grilled-chicken.jpg"
 # imageAlt: "Greek salad with grilled chicken, feta, olives, and red onion in a large bowl"
-date: 2026-02-22
+date: 2026-02-05
 draft: false
 ---
 

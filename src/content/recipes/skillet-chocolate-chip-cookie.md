@@ -10,7 +10,7 @@ category: "dessert"
 tags: ["dessert", "vegetarian", "30-minute", "comfort-food", "american"]
 # image: "/images/skillet-chocolate-chip-cookie.jpg"
 # imageAlt: "Giant chocolate chip cookie in a cast iron skillet with melty chocolate"
-date: 2026-02-22
+date: 2026-02-20
 draft: false
 ---
 

@@ -10,7 +10,7 @@ category: "breakfast"
 tags: ["breakfast", "eggs", "vegetarian", "mediterranean", "30-minute", "one-pan"]
 # image: "/images/recipes/shakshuka.jpg"
 # imageAlt: "Eggs poached in a vibrant red tomato sauce with crumbled feta and fresh herbs"
-date: 2026-02-22
+date: 2026-02-19
 draft: false
 ---
 

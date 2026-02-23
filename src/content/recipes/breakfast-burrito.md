@@ -10,8 +10,7 @@ category: "breakfast"
 tags: ["breakfast", "eggs", "mexican", "30-minute", "comfort-food"]
 # image: "/images/recipes/breakfast-burrito.jpg"
 # imageAlt: "Loaded breakfast burrito cut in half showing scrambled eggs, potatoes, and cheese"
-date: 2026-02-22
-sortOrder: 10
+date: 2026-02-05
 draft: false
 ---
 

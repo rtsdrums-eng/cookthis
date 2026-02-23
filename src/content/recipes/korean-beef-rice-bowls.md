@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["beef", "asian", "30-minute", "weeknight", "quick"]
 # image: "/images/korean-beef-rice-bowls.jpg"
 # imageAlt: "Korean ground beef over steamed rice with cucumbers, green onions, and sesame seeds"
-date: 2026-02-22
+date: 2026-02-08
 draft: false
 ---
 

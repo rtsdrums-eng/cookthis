@@ -10,7 +10,7 @@ category: "breakfast"
 tags: ["breakfast", "eggs", "30-minute", "one-pan", "american"]
 # image: "/images/loaded-breakfast-hash.jpg"
 # imageAlt: "Crispy breakfast hash with potatoes, sausage, peppers, and sunny-side-up eggs"
-date: 2026-02-22
+date: 2026-02-10
 draft: false
 ---
 

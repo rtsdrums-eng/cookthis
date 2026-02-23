@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["30-minute", "beef", "comfort-food", "weeknight", "american"]
 # image: "/images/sloppy-joes.jpg"
 # imageAlt: "Saucy sloppy joe meat piled on a toasted hamburger bun"
-date: 2026-02-22
+date: 2026-02-02
 draft: false
 ---
 

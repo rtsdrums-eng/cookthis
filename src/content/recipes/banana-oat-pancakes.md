@@ -10,7 +10,7 @@ category: "breakfast"
 tags: ["breakfast", "vegetarian", "healthy", "30-minute", "gluten-free"]
 # image: "/images/banana-oat-pancakes.jpg"
 # imageAlt: "Stack of banana oat pancakes topped with sliced bananas and a drizzle of honey"
-date: 2026-02-22
+date: 2026-02-01
 draft: false
 ---
 

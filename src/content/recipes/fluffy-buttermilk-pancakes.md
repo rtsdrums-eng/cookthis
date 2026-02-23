@@ -10,7 +10,7 @@ category: "breakfast"
 tags: ["breakfast", "vegetarian", "30-minute", "comfort-food", "american"]
 # image: "/images/fluffy-buttermilk-pancakes.jpg"
 # imageAlt: "Stack of fluffy buttermilk pancakes topped with butter and maple syrup"
-date: 2026-02-22
+date: 2026-02-01
 draft: false
 ---
 

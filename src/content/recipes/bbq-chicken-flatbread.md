@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["chicken", "30-minute", "quick", "weeknight", "american"]
 # image: "/images/bbq-chicken-flatbread.jpg"
 # imageAlt: "BBQ chicken flatbread with melted cheese, red onion, and cilantro on a cutting board"
-date: 2026-02-22
+date: 2026-02-02
 draft: false
 ---
 

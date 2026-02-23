@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["vegetarian", "vegan", "indian", "30-minute", "weeknight", "healthy"]
 # image: "/images/chickpea-coconut-curry.jpg"
 # imageAlt: "Creamy golden chickpea coconut curry with spinach served over basmati rice"
-date: 2026-02-22
+date: 2026-02-12
 draft: false
 ---
 

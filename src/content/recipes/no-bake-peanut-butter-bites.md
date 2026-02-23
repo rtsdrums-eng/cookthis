@@ -10,7 +10,7 @@ category: "dessert"
 tags: ["dessert", "15-minute", "quick", "vegetarian", "no-cook"]
 # image: "/images/no-bake-peanut-butter-bites.jpg"
 # imageAlt: "Rows of no-bake peanut butter bites coated in chocolate on parchment paper"
-date: 2026-02-22
+date: 2026-02-15
 draft: false
 ---
 

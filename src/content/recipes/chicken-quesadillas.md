@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["30-minute", "chicken", "weeknight", "comfort-food", "quick"]
 # image: "/images/chicken-quesadillas.jpg"
 # imageAlt: "Golden crispy chicken quesadillas cut into triangles with salsa and sour cream"
-date: 2026-02-22
+date: 2026-02-11
 draft: false
 ---
 

@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["chicken", "asian", "30-minute", "quick", "weeknight", "one-pan"]
 # image: "/images/thai-basil-chicken.jpg"
 # imageAlt: "Thai basil chicken stir fry with fresh basil leaves over steamed jasmine rice"
-date: 2026-02-22
+date: 2026-02-05
 draft: false
 ---
 

@@ -10,7 +10,7 @@ category: "dessert"
 tags: ["dessert", "mexican", "30-minute", "comfort-food", "vegetarian"]
 # image: "/images/churro-bites.jpg"
 # imageAlt: "Golden churro bites coated in cinnamon sugar with chocolate dipping sauce"
-date: 2026-02-22
+date: 2026-02-13
 draft: false
 ---
 

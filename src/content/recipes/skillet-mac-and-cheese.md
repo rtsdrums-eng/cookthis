@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["30-minute", "comfort-food", "weeknight", "vegetarian", "one-pan"]
 # image: "/images/skillet-mac-and-cheese.jpg"
 # imageAlt: "Creamy mac and cheese in a cast iron skillet topped with breadcrumbs"
-date: 2026-02-22
+date: 2026-02-01
 draft: false
 ---
 

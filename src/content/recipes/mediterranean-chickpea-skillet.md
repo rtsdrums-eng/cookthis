@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["vegetarian", "mediterranean", "30-minute", "one-pan", "healthy", "weeknight"]
 # image: "/images/mediterranean-chickpea-skillet.jpg"
 # imageAlt: "One-pan Mediterranean chickpea skillet with feta, olives, and fresh herbs"
-date: 2026-02-22
+date: 2026-02-12
 draft: false
 ---
 

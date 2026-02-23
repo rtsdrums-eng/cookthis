@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["shrimp", "seafood", "italian", "30-minute", "weeknight", "pasta"]
 # image: "/images/lemon-garlic-shrimp-pasta.jpg"
 # imageAlt: "Linguine with sautéed shrimp in a lemon garlic butter sauce topped with parsley"
-date: 2026-02-22
+date: 2026-02-09
 draft: false
 ---
 

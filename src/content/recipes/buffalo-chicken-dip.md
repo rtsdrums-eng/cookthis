@@ -10,7 +10,7 @@ category: "snack"
 tags: ["snack", "chicken", "30-minute", "appetizer", "comfort-food"]
 # image: "/images/buffalo-chicken-dip.jpg"
 # imageAlt: "Bubbly buffalo chicken dip in a baking dish with tortilla chips"
-date: 2026-02-22
+date: 2026-02-06
 draft: false
 ---
 

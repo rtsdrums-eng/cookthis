@@ -1,19 +1,37 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import MinimalRecipeCard from "../components/MinimalRecipeCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MinimalRecipeCard from "../../components/MinimalRecipeCard.astro";
 import { getCollection } from "astro:content";
 
-const allRecipes = await getCollection("recipes", ({ data }) => !data.draft);
-// Sort by date (newest first)
-const recipes = allRecipes.sort((a, b) => {
-  return b.data.date.valueOf() - a.data.date.valueOf();
-});
+export async function getStaticPaths() {
+  const allRecipes = await getCollection("recipes", ({ data }) => !data.draft);
+  // Sort by date (newest first)
+  const recipes = allRecipes.sort((a, b) => {
+    return b.data.date.valueOf() - a.data.date.valueOf();
+  });
 
-// Pagination
-const currentPage = 1;
-const recipesPerPage = 9;
-const totalPages = Math.ceil(recipes.length / recipesPerPage);
-const paginatedRecipes = recipes.slice(0, recipesPerPage);
+  const recipesPerPage = 9;
+  const totalPages = Math.ceil(recipes.length / recipesPerPage);
+
+  const paths = [];
+  for (let page = 1; page <= totalPages; page++) {
+    const start = (page - 1) * recipesPerPage;
+    const end = start + recipesPerPage;
+    paths.push({
+      params: { page: page.toString() },
+      props: {
+        recipes: recipes.slice(start, end),
+        currentPage: page,
+        totalPages,
+        totalRecipes: recipes.length
+      }
+    });
+  }
+
+  return paths;
+}
+
+const { recipes: paginatedRecipes, currentPage, totalPages, totalRecipes } = Astro.props;
 ---
 
 <BaseLayout>
@@ -63,7 +81,7 @@ const paginatedRecipes = recipes.slice(0, recipesPerPage);
         <!-- Pagination -->
         {totalPages > 1 && (
           <div class="pagination">
-            <a href={currentPage > 1 ? `/page/${currentPage - 1}` : '#'}
+            <a href={currentPage > 2 ? `/page/${currentPage - 1}` : currentPage === 2 ? '/' : '#'}
                class={`page-arrow ${currentPage === 1 ? 'disabled' : ''}`}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M15 18l-6-6 6-6"/>

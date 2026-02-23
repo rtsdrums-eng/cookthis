@@ -8,8 +8,8 @@ totalTime: 25
 servings: 4
 category: "breakfast"
 tags: ["breakfast", "eggs", "30-minute", "comfort-food", "american"]
-# image: "/images/bacon-egg-and-cheese-biscuits.jpg"
-# imageAlt: "Breakfast biscuit sandwich with bacon, fried egg, and melted cheddar"
+image: "/images/bacon-egg-cheese-biscuit.png"
+imageAlt: "Breakfast biscuit sandwich with bacon, fried egg, and melted cheddar"
 date: 2026-02-22
 draft: false
 ---

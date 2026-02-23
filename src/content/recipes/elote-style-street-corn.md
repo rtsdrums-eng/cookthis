@@ -10,7 +10,7 @@ category: "side"
 tags: ["side", "vegetarian", "mexican", "30-minute", "quick", "summer"]
 # image: "/images/elote-style-street-corn.jpg"
 # imageAlt: "Charred corn on the cob coated in creamy sauce with cotija cheese and chili powder"
-date: 2026-02-22
+date: 2026-02-19
 draft: false
 ---
 

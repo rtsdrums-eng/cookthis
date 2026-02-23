@@ -10,7 +10,7 @@ category: "breakfast"
 tags: ["breakfast", "pork", "30-minute", "comfort-food", "american"]
 # image: "/images/country-sausage-gravy-and-biscuits.jpg"
 # imageAlt: "Warm biscuits smothered in thick white sausage gravy with black pepper"
-date: 2026-02-22
+date: 2026-02-15
 draft: false
 ---
 

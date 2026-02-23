@@ -10,7 +10,7 @@ category: "snack"
 tags: ["snack", "vegetarian", "italian", "appetizer", "quick", "30-minute"]
 # image: "/images/caprese-bruschetta.jpg"
 # imageAlt: "Rows of bruschetta topped with diced tomatoes, mozzarella, and fresh basil"
-date: 2026-02-22
+date: 2026-02-07
 draft: false
 ---
 

@@ -10,7 +10,7 @@ category: "dinner"
 tags: ["vegetarian", "italian", "30-minute", "date-night", "comfort-food"]
 # image: "/images/mushroom-risotto.jpg"
 # imageAlt: "Creamy mushroom risotto in a shallow bowl topped with Parmesan and fresh thyme"
-date: 2026-02-22
+date: 2026-02-14
 draft: false
 ---
 

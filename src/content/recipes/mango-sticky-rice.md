@@ -10,7 +10,7 @@ category: "dessert"
 tags: ["dessert", "asian", "vegetarian", "30-minute", "no-cook"]
 # image: "/images/mango-sticky-rice.jpg"
 # imageAlt: "Thai mango sticky rice with coconut cream drizzle on a plate"
-date: 2026-02-22
+date: 2026-02-11
 draft: false
 ---
 

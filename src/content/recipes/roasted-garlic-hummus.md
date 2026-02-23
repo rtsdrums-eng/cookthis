@@ -10,7 +10,7 @@ category: "side"
 tags: ["side", "vegetarian", "vegan", "mediterranean", "15-minute", "quick", "healthy"]
 # image: "/images/roasted-garlic-hummus.jpg"
 # imageAlt: "Creamy hummus drizzled with olive oil and paprika served with pita bread"
-date: 2026-02-22
+date: 2026-02-17
 draft: false
 ---
 
