@@ -4,12 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && npm run pagefind && cp -r public/admin dist/",
+    "build": "astro build && npm run pagefind",
     "pagefind": "pagefind --site dist",
     "preview": "astro preview",
-    "astro": "astro",
-    "tinacms:dev": "tinacms dev -c 'astro dev'",
-    "tinacms:build": "tinacms build && astro build"
+    "astro": "astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.0",
@@ -17,8 +15,6 @@
     "tailwindcss": "^4.2.0"
   },
   "devDependencies": {
-    "@tinacms/cli": "^2.1.6",
-    "pagefind": "^1.4.0",
-    "tinacms": "^3.5.0"
+    "pagefind": "^1.4.0"
   }
 }
