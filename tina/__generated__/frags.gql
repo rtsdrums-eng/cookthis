@@ -1,0 +1,18 @@
+fragment RecipesParts on Recipes {
+  __typename
+  title
+  description
+  author
+  prepTime
+  cookTime
+  totalTime
+  servings
+  category
+  tags
+  image
+  imageAlt
+  date
+  sortOrder
+  draft
+  body
+}

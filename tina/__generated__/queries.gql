@@ -1,0 +1,54 @@
+query recipes($relativePath: String!) {
+  recipes(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...RecipesParts
+  }
+}
+
+query recipesConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: RecipesFilter) {
+  recipesConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...RecipesParts
+      }
+    }
+  }
+}
