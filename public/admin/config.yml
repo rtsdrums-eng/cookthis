@@ -1,0 +1,42 @@
+backend:
+  name: github
+  repo: ryanstansky/cookthis
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "recipes"
+    label: "Recipes"
+    folder: "src/content/recipes"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    sortable_fields: ["order", "title", "date"]
+    fields:
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Order", name: "order", widget: "number", default: 999, hint: "Lower numbers appear first", required: false}
+      - {label: "Date", name: "date", widget: "datetime", required: false}
+      - {label: "Image", name: "image", widget: "image", required: false, allow_multiple: false}
+      - {label: "Image Alt Text", name: "imageAlt", widget: "string", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Servings", name: "servings", widget: "string", required: false}
+      - {label: "Prep Time", name: "prepTime", widget: "string", required: false}
+      - {label: "Cook Time", name: "cookTime", widget: "string", required: false}
+      - {label: "Total Time", name: "totalTime", widget: "string", required: false}
+      - label: "Ingredients"
+        name: "ingredients"
+        widget: "list"
+        required: false
+        fields:
+          - {label: "Item", name: "item", widget: "string"}
+      - label: "Instructions"
+        name: "instructions"
+        widget: "list"
+        required: false
+        fields:
+          - {label: "Step", name: "step", widget: "text"}
+      - {label: "Notes", name: "notes", widget: "markdown", required: false}
+      - {label: "Body", name: "body", widget: "markdown", required: false}
