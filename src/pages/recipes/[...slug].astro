@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import CopyButton from "../../components/CopyButton.astro";
 import PrintButton from "../../components/PrintButton.astro";
 import { getCollection, render } from "astro:content";
 
@@ -60,7 +59,6 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
 
     <!-- Action buttons -->
     <div class="no-print flex gap-2 mb-6">
-      <CopyButton />
       <PrintButton />
     </div>
 
