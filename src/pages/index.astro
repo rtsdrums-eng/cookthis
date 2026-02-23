@@ -30,15 +30,23 @@ const paginatedRecipes = recipes.slice(0, recipesPerPage);
     <nav class="nav-bar">
       <div class="nav-container">
         <a href="/" class="logo">cookthis</a>
-        <form class="nav-newsletter-form" id="nav-newsletter-form">
-          <input
-            type="email"
-            placeholder="enter your email"
-            class="nav-email-input"
-            required
-          />
-          <button type="submit" class="nav-submit-btn">subscribe</button>
-        </form>
+        <div class="nav-newsletter-wrapper">
+          <button class="mobile-mail-toggle" id="mobile-mail-toggle" aria-label="Newsletter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-10 5L2 7"/>
+            </svg>
+          </button>
+          <form class="nav-newsletter-form" id="nav-newsletter-form">
+            <input
+              type="email"
+              placeholder="enter your email"
+              class="nav-email-input"
+              required
+            />
+            <button type="submit" class="nav-submit-btn">subscribe</button>
+          </form>
+        </div>
       </div>
     </nav>
 
@@ -188,6 +196,80 @@ const paginatedRecipes = recipes.slice(0, recipesPerPage);
 
   .nav-submit-btn.success {
     background: #4CAF50;
+  }
+
+  /* Mobile Mail Toggle */
+  .nav-newsletter-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-mail-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-mail-toggle:hover {
+    color: #1a1a1a;
+  }
+
+  .mobile-mail-toggle svg {
+    display: block;
+  }
+
+  /* Mobile Newsletter Styles */
+  @media (max-width: 640px) {
+    .nav-container {
+      padding: 0 1rem;
+    }
+
+    .mobile-mail-toggle {
+      display: block;
+    }
+
+    .nav-newsletter-form {
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .nav-newsletter-form.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-email-input {
+      width: 120px;
+      font-size: 12px;
+      padding: 0.4rem 0.5rem;
+    }
+
+    .nav-submit-btn {
+      font-size: 11px;
+      padding: 0.4rem 0.6rem;
+    }
+
+    /* Ensure form doesn't overlap logo */
+    .nav-newsletter-wrapper {
+      position: relative;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+    }
   }
 
   /* Recipes Section */
@@ -347,6 +429,38 @@ const paginatedRecipes = recipes.slice(0, recipesPerPage);
 <script>
   // Handle newsletter form submissions with Buttondown
   document.addEventListener('DOMContentLoaded', () => {
+    // Mobile mail toggle functionality
+    const mobileMailToggle = document.getElementById('mobile-mail-toggle');
+    const navForm = document.getElementById('nav-newsletter-form');
+
+    if (mobileMailToggle && navForm) {
+      mobileMailToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navForm.classList.toggle('active');
+
+        // Focus email input when opened
+        if (navForm.classList.contains('active')) {
+          const emailInput = navForm.querySelector('input[type="email"]');
+          if (emailInput) {
+            setTimeout(() => emailInput.focus(), 100);
+          }
+        }
+      });
+
+      // Close form when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navForm.contains(e.target) && !mobileMailToggle.contains(e.target)) {
+          navForm.classList.remove('active');
+        }
+      });
+
+      // Close form when submitting
+      navForm.addEventListener('submit', () => {
+        setTimeout(() => {
+          navForm.classList.remove('active');
+        }, 100);
+      });
+    }
     async function handleNewsletterSubmit(form, emailInput, button) {
       const email = emailInput.value.trim();
       const originalText = button.textContent;
@@ -394,13 +508,13 @@ const paginatedRecipes = recipes.slice(0, recipesPerPage);
     }
 
     // Handle navbar newsletter form
-    const navForm = document.getElementById('nav-newsletter-form');
-    if (navForm) {
-      navForm.addEventListener('submit', async (e) => {
+    const navNewsletterForm = document.getElementById('nav-newsletter-form');
+    if (navNewsletterForm) {
+      navNewsletterForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const emailInput = navForm.querySelector('input[type="email"]');
-        const button = navForm.querySelector('button');
-        await handleNewsletterSubmit(navForm, emailInput, button);
+        const emailInput = navNewsletterForm.querySelector('input[type="email"]');
+        const button = navNewsletterForm.querySelector('button[type="submit"]');
+        await handleNewsletterSubmit(navNewsletterForm, emailInput, button);
       });
     }
 
@@ -410,7 +524,7 @@ const paginatedRecipes = recipes.slice(0, recipesPerPage);
       footerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const emailInput = footerForm.querySelector('input[type="email"]');
-        const button = footerForm.querySelector('button');
+        const button = footerForm.querySelector('button[type="submit"]');
         await handleNewsletterSubmit(footerForm, emailInput, button);
       });
     }

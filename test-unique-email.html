@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Email Test - Buttondown</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: #1976d2;
+        }
+        button {
+            background: #E8663C;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+        }
+        button:hover {
+            background: #D4552B;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .email-display {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Unique Email Submission Test</h1>
+
+        <div class="info">
+            <strong>Problem:</strong> Buttondown recognizes gmail+aliases as the same email.<br><br>
+            <strong>Solution:</strong> Test with completely different email addresses!
+        </div>
+
+        <div class="email-display" id="test-email">
+            Generating unique email...
+        </div>
+
+        <button onclick="generateAndSubmit()">Generate & Submit Unique Email</button>
+
+        <button onclick="testWithCustom()">Test with Custom Email</button>
+
+        <div id="result" class="result"></div>
+
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+            <h3>Alternative Testing Options:</h3>
+            <button onclick="window.open('https://temp-mail.org', '_blank')">Get Temporary Email</button>
+            <button onclick="window.open('https://buttondown.email/subscribers', '_blank')">Check Buttondown Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        function generateUniqueEmail() {
+            const timestamp = Date.now();
+            const random = Math.random().toString(36).substring(7);
+            return `test_${timestamp}_${random}@example.com`;
+        }
+
+        async function generateAndSubmit() {
+            const email = generateUniqueEmail();
+            document.getElementById('test-email').textContent = email;
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result success';
+            resultDiv.innerHTML = 'Submitting: ' + email;
+            resultDiv.style.display = 'block';
+
+            try {
+                const formData = new FormData();
+                formData.append('email', email);
+
+                await fetch('https://buttondown.com/api/emails/embed-subscribe/cookthis', {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                resultDiv.innerHTML = `
+                    <strong>✅ Submitted successfully!</strong><br><br>
+                    Email: ${email}<br><br>
+                    Note: Since this is a fake email (@example.com), you won't receive a confirmation.
+                    Try with a real email address or use a temporary email service to verify the flow works.
+                `;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = 'Error: ' + error.message;
+            }
+        }
+
+        function testWithCustom() {
+            const email = prompt('Enter a REAL email address (not a Gmail+alias):');
+            if (!email) return;
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result success';
+            resultDiv.style.display = 'block';
+
+            const formData = new FormData();
+            formData.append('email', email);
+
+            fetch('https://buttondown.com/api/emails/embed-subscribe/cookthis', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(() => {
+                resultDiv.innerHTML = `
+                    <strong>✅ Submitted: ${email}</strong><br><br>
+                    Now check that email inbox for the Buttondown confirmation!
+                `;
+            });
+        }
+
+        // Generate initial email on load
+        window.addEventListener('load', () => {
+            document.getElementById('test-email').textContent = generateUniqueEmail();
+        });
+    </script>
+</body>
+</html>
