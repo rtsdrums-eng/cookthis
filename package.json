@@ -10,6 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@clerk/clerk-js": "^5.125.0",
+    "@supabase/supabase-js": "^2.97.0",
     "@tailwindcss/vite": "^4.2.0",
     "astro": "^5.17.1",
     "tailwindcss": "^4.2.0"
